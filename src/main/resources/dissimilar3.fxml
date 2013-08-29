@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane id="GridPane" fx:id="mainPane" maxHeight="-1.0" minHeight="480.0" minWidth="640.0" prefHeight="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="uk.bl.dpt.qa.gui.DissimilarGUIThread">
+  <children>
+    <MenuBar fx:id="menuBar" prefWidth="1000.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+      <menus>
+        <Menu mnemonicParsing="false" text="File" fx:id="menuFile">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#openFile" text="Open..." fx:id="menuOpen" />
+            <MenuItem mnemonicParsing="false" onAction="#saveResults" text="Save..." fx:id="menuSave" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" onAction="#close" text="Close" fx:id="menuFileClose" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Edit" fx:id="menuEdit">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Delete" fx:id="menuEditDelete" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help" fx:id="menuHelp">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About" fx:id="menuHelpAbout" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <GridPane GridPane.columnIndex="0" GridPane.rowIndex="1">
+      <children>
+        <GridPane maxWidth="-Infinity" minWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+          <children>
+            <VBox fx:id="psnrPane" minHeight="66.0" prefHeight="66.0" prefWidth="162.0" style="-fx-border-width: 2;&#10;-fx-border-color: grey;" GridPane.columnIndex="0" GridPane.rowIndex="0">
+              <children>
+                <Label fx:id="psnrLabel" text="PSNR" />
+                <Label fx:id="psnrLabelValue" prefWidth="153.0" text="50.1234" textFill="RED" textOverrun="ELLIPSIS">
+                  <font>
+                    <Font size="36.0" fx:id="x1" />
+                  </font>
+                </Label>
+              </children>
+            </VBox>
+            <VBox fx:id="ssimPane" minHeight="66.0" prefHeight="66.0" prefWidth="162.0" style="-fx-border-width: 2;&#10;-fx-border-color: grey;" GridPane.columnIndex="0" GridPane.rowIndex="1">
+              <children>
+                <Label fx:id="ssimLabel" text="SSIM Mean" />
+                <Label fx:id="ssimLabelValue" font="$x1" prefWidth="153.0" text="0.99999" textFill="RED" textOverrun="ELLIPSIS" />
+              </children>
+            </VBox>
+            <VBox id="ssimPane" fx:id="ssimMinPane" minHeight="66.0" prefHeight="66.0" prefWidth="162.0" style="-fx-border-width: 2;&#10;-fx-border-color: grey;" GridPane.columnIndex="0" GridPane.rowIndex="2">
+              <children>
+                <Label id="ssimLabel" fx:id="ssimMinLabel" text="SSIM Min" />
+                <Label id="ssimLabelValue" fx:id="ssimMinValue" font="$x1" prefWidth="153.0" text="0.99999" textFill="RED" textOverrun="ELLIPSIS" />
+              </children>
+            </VBox>
+            <VBox id="ssimPane" fx:id="ssimVariancePane" minHeight="66.0" minWidth="-1.0" prefHeight="66.0" prefWidth="162.0" style="-fx-border-width: 2;&#10;-fx-border-color: grey;" GridPane.columnIndex="0" GridPane.rowIndex="3">
+              <children>
+                <Label id="ssimLabel" fx:id="ssimVarianceLabel" text="SSIM Variance" />
+                <Label id="ssimLabelValue" fx:id="ssimVarianceValue" font="$x1" prefWidth="153.0" text="0.99999" textFill="RED" textOverrun="ELLIPSIS" />
+              </children>
+            </VBox>
+            <Label fx:id="labelCheckStatus" text="" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            <CheckBox fx:id="checkboxAdvance" mnemonicParsing="false" text="Advance on OK/FAIL" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
+            <CheckBox fx:id="checkboxGenerateOnLoad" mnemonicParsing="false" text="Generate PSNR/SSIM on load" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER" />
+            <ProgressIndicator fx:id="progressIndicator" maxHeight="50.0" maxWidth="50.0" prefHeight="50.0" prefWidth="50.0" progress="0.0" visible="true" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            <Button fx:id="buttonToggleSSIMHeatmap" mnemonicParsing="false" onAction="#toggleSSIMHeatmap" text="Toggle SSIM heat map" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+            <CheckBox fx:id="checkboxPrecacheNext" mnemonicParsing="false" text="Precache next record" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+        </GridPane>
+        <GridPane GridPane.columnIndex="0" GridPane.rowIndex="0">
+          <children>
+            <Label fx:id="imageLeftLabel" maxHeight="-Infinity" text="First image" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+            <Label fx:id="imageRightLabel" maxHeight="-Infinity" text="Second image" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+            <GridPane id="imageRightPane" fx:id="imageRightGrid" style="-fx-border-color: grey;&#10;-fx-border-width: 2;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+              <children>
+                <ScrollPane fx:id="scrollPaneRight" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;&#10;-fx-padding: 0;&#10;" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="0" GridPane.valignment="CENTER">
+                  <content>
+                    <Group id="Group" fx:id="groupRight">
+                      <children>
+                        <ImageView fx:id="imageRight" fitHeight="0.0" fitWidth="0.0" layoutX="100.0" layoutY="146.0" onScroll="#mouseScroll" pickOnBounds="true" preserveRatio="true" style="" />
+                      </children>
+                    </Group>
+                  </content>
+                </ScrollPane>
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <GridPane id="imageLeftPane" fx:id="imageLeftGrid" style="-fx-border-color: grey;&#10;-fx-border-width: 2;&#10;" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+              <children>
+                <ScrollPane fx:id="scrollPaneLeft" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;&#10;-fx-padding: 0;&#10;&#10;&#10;" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" GridPane.valignment="CENTER">
+                  <content>
+                    <Group id="Group" fx:id="groupLeft">
+                      <children>
+                        <ImageView fx:id="imageLeft" fitHeight="0.0" fitWidth="0.0" layoutX="0.0" layoutY="0.0" onScroll="#mouseScroll" pickOnBounds="true" preserveRatio="true" style="" />
+                      </children>
+                    </Group>
+                  </content>
+                </ScrollPane>
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+        </GridPane>
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="200.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+    <GridPane minHeight="60.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
+      <children>
+        <Button fx:id="buttonPrevious" mnemonicParsing="false" onAction="#previousPressed" style="-fx-color: blue" text="Previous" GridPane.columnIndex="0" GridPane.rowIndex="0">
+          <font>
+            <Font size="30.0" fx:id="x2" />
+          </font>
+        </Button>
+        <Button fx:id="buttonNext" font="$x2" mnemonicParsing="false" onAction="#nextPressed" style="-fx-color: blue" text="Next" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
+        <Button fx:id="buttonOK" font="$x2" mnemonicParsing="false" onAction="#okPressed" style="-fx-color: green;&#10;" text="OK" GridPane.columnIndex="3" GridPane.rowIndex="0">
+          <GridPane.margin>
+            <Insets left="10.0" />
+          </GridPane.margin>
+        </Button>
+        <Button fx:id="buttonFail" font="$x2" mnemonicParsing="false" onAction="#failPressed" style="-fx-color: red" text="FAIL" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
+          <GridPane.margin>
+            <Insets right="10.0" />
+          </GridPane.margin>
+        </Button>
+        <Label fx:id="labelImageNumber" text="" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+        <Button fx:id="buttonZoomToFit" mnemonicParsing="false" onAction="#zoomToFit" text="Zoom to fit" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+  </children>
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="-Infinity" minHeight="10.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="-Infinity" minHeight="10.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+</GridPane>

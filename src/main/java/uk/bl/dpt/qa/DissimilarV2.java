@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 The Britsh Library/SCAPE Project Consortium
+ * Copyright 2013 The British Library/SCAPE Project Consortium
  * Author: William Palmer (William.Palmer@bl.uk)
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
@@ -54,13 +54,13 @@ public class DissimilarV2 {
 	/**
 	 * Default SSIM window size (8)
 	 */
-	final static int SSIMWINDOWSIZE = 8;
+	public final static int SSIMWINDOWSIZE = 8;
 
 	/**
 	 * Version string (loaded from Maven properties in jar)
 	 */
 	private static String version = "NOVERSION";
-
+	
 	/**
 	 * Calculate the SSIM value on a window of pixels
 	 * @param pLumaOne luma values for first image
@@ -126,7 +126,7 @@ public class DissimilarV2 {
 	 * @param pVariance list to hold return value for ssim-variance
 	 * @return SSIM
 	 */
-	private static double calcSSIM(final int[] pOne, final int[] pTwo, final int pWidth, final int pHeight, final boolean pGreyscale, 
+	public static double calcSSIM(final int[] pOne, final int[] pTwo, final int pWidth, final int pHeight, final boolean pGreyscale, 
 									final String pHeatMapFilename, List<Double> pMin, List<Double> pVariance) {
 
 		if(!checkPair(pOne, pTwo)) return -1;
@@ -197,7 +197,7 @@ public class DissimilarV2 {
 	 * @param pWidth number of SSIM windows down
 	 * @param pFilename filename to save the image to (png)
 	 */
-	private static void dumpSSIMHeatMap(final double[] pValues, final int pHeight, final int pWidth, final String pFilename) {
+	private static BufferedImage dumpSSIMHeatMap(final double[] pValues, final int pHeight, final int pWidth, final String pFilename) {
 		BufferedImage heatMap = new BufferedImage(pWidth, pHeight, BufferedImage.TYPE_USHORT_GRAY);
 		
 		final int maxPixelValue = (int)Math.pow(2, heatMap.getColorModel().getPixelSize())-1;
@@ -213,11 +213,17 @@ public class DissimilarV2 {
 			}
 		}
 		
-		try {
-			ImageIO.write(heatMap, "png", new File(pFilename));
-		} catch (IOException e) {
-			e.printStackTrace();
+		//only write to file if filename is non-null
+		if(pFilename!=null) {
+			try {
+				ImageIO.write(heatMap, "png", new File(pFilename));
+			} catch (IOException e) {
+				e.printStackTrace();
+				return null;
+			}
 		}
+		
+		return heatMap;
 	}
 
 	/**
@@ -258,6 +264,7 @@ public class DissimilarV2 {
 		int channels = 3;
 		if(pGreyscale) channels = 1;
 		
+		//FIXME: change to BigDecimal?
 		double sumSquaredErrors = 0;
 		
 		int oneBlue  = 0;
@@ -283,6 +290,8 @@ public class DissimilarV2 {
 			
 			}
 		}
+		
+		//System.out.println("SSE: "+sumSquaredErrors);
 		
 		final double meanSquaredError = sumSquaredErrors/(pOne.length*channels);
 		
@@ -330,7 +339,7 @@ public class DissimilarV2 {
 	 * @param pGreyscale whether the images are greyscale or not
 	 * @return calculated psnr
 	 */
-	private static double calcPSNR(final int[] pOne, final int[] pTwo, final boolean pGreyscale) {
+	public static double calcPSNR(final int[] pOne, final int[] pTwo, final boolean pGreyscale) {
 		
 		if(!checkPair(pOne, pTwo)) return -1;
 		

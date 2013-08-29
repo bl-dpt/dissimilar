@@ -1,0 +1,19 @@
+TODO:
+=====
+
+* [IN-PROGRESS] Save CSV with results and manual check results
+* [IN-PROGRESS] fix zooming - make default zoom to fit
+* when zooming ensure same point stays under cursor
+* [IN-PROGRESS] fix manual check display on rhs of gui
+* make precache start immediately when clicked (not when next clicked)
+
+* [DONE] pre-cache next set of images
+* [DONE - fixed by jp2 loader] fix DissimilarV2 code when image loaded as a jp2 - if b&w is it loaded as colour? seems to affect psnr/ssim etc
+* [DONE] Add JP2 loading
+* [DONE] background thread to calculate results in advance of being clicked on
+* [DONE] make the window expandable
+* [DONE] add advance checkbox on ok/fail
+* [DONE] fix heatmap overlays
+* [DONE] re-use background loading code to process single pairs and remove duplicate code
+* [DONE] ensure that first pair of images are not processed twice
+* [DONE - reorganised] move as much code as possible outside controller

@@ -1,7 +1,9 @@
 Dissimilar 0.5-SNAPSHOT
 =======================
 A Java program for calculating PSNR and SSIM.  By default a jar for the GUI is built.
- 
+
+IT IS NOT YET READY OR INTENDED FOR PRODUCTION USE.  See blog post: http://www.openplanetsfoundation.org/blogs/2013-07-17-dissimilar-experimental-image-quality-assurance-tool
+
 Requirements:
 * JDK7 with JavaFX 
 * Apache-commons imaging 1.0-SNAPSHOT needs to be packaged and installed to your Maven repository (snapshot 

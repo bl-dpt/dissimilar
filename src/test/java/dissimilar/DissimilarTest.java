@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 The Britsh Library/SCAPE Project Consortium
+ * Copyright 2013 The British Library/SCAPE Project Consortium
  * Author: William Palmer (William.Palmer@bl.uk)
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");

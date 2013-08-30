@@ -5,7 +5,7 @@
 	<artifactId>dissimilar</artifactId>
 	<packaging>jar</packaging>
 	<version>0.5-SNAPSHOT</version>
-	<name>dissimilarg</name>
+	<name>dissimilar</name>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
